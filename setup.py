@@ -18,7 +18,7 @@ setuptools.setup(
     include_package_data=True,
     packages=setuptools.find_packages(),
     install_requires=[
-        'websockets'
+        'eventlet'
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
