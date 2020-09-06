@@ -18,6 +18,11 @@ class SocketWorker(Thread):
         self.port = port
         self.invoker = ServerSocket()
 
+    def push_data(self, name, data):
+
+        # self.invoker.add_data(name, data)
+        pass
+
     def run(self):
 
         wsgi.server(listen(('', self.port)), self.invoker)

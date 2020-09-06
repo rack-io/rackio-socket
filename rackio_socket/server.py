@@ -8,6 +8,7 @@ import time
 import random
 
 from threading import Thread
+from queue import Queue
 
 from eventlet import websocket
 
@@ -21,7 +22,7 @@ class ServerSocket:
 
         app = Rackio()
         tag_engine = TagEngine()
-        
+
         while True:
 
             duration = random.random() / 10
@@ -33,5 +34,4 @@ class ServerSocket:
             
             message = json.dumps(result)
             self.send(message)
-            
             
