@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+<span>variable: </span><span id="variable"></span>
+<script>
+var ws = new WebSocket('ws://localhost:5000');
+var variableSpan = document.getElementById('variable');
+
+ws.onmessage = function (event) {
+    var message = JSON.parse(event.data);
+    console.log(message);
+    variableSpan.innerHTML = message.tags[0].value;
+}
+</script>
+</body>
+</html>
