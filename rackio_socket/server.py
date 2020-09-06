@@ -17,12 +17,19 @@ class ServerSocket:
     @websocket.WebSocketWSGI
     def __call__(self):
 
-        self.variable = 0
+        from rackio import Rackio
+
+        app = Rackio()
         
         while True:
-            duration = random.random() / 100
+
+            duration = random.random() / 10
             time.sleep(duration)
-            random_increment = int(random.random() * 10) + 1
-            self.variable += random_increment
-            message = json.dumps({'variable': self.variable})
+
+            result = dict()
+            result["summary"] = app.summary()
+            
+            message = json.dumps(result)
             self.send(message)
+            
+            

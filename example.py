@@ -3,11 +3,11 @@ import time
 from random import random
 
 from rackio import Rackio, TagEngine
-from rackio_swagger import RackioSwagger
+from rackio_socket import RackioSocket
 
 app = Rackio()
 
-RackioSwagger(app)
+RackioSocket(app)
 
 tag_egine = TagEngine()
 
@@ -42,4 +42,5 @@ def writer1():
 
 if __name__ == "__main__":
     
+    app.set_log(file="app.log")
     app.run(8030)

@@ -12,16 +12,16 @@ from .worker import SocketWorker
 from .decorator import AppendWorker
 
 
-class SwaggerSocket(Singleton):
+class SocketCore(Singleton):
 
     def __init__(self):
 
-        super(SwaggerSocket, self).__init__()
+        super(SocketCore, self).__init__()
 
         self.app = None
         self.worker = None
 
-    def __call__(self, app, port):
+    def __call__(self, app, port=5000):
 
         self.app = app
         self.worker = SocketWorker(port)
