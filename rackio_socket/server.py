@@ -17,9 +17,10 @@ class ServerSocket:
     @websocket.WebSocketWSGI
     def __call__(self):
 
-        from rackio import Rackio
+        from rackio import Rackio, TagEngine
 
         app = Rackio()
+        tag_engine = TagEngine()
         
         while True:
 
@@ -28,6 +29,7 @@ class ServerSocket:
 
             result = dict()
             result["summary"] = app.summary()
+            result["tags"] = tag_engine.serialize()
             
             message = json.dumps(result)
             self.send(message)
