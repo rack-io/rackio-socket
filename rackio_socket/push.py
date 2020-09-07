@@ -10,6 +10,8 @@ class PushCore(Singleton):
 
     def __init__(self):
 
+        super(PushCore, self).__init__()
+
         self.data = dict()
 
     def get_data(self):
