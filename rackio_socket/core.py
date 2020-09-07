@@ -10,6 +10,7 @@ from ._singleton import Singleton
 from .worker import SocketWorker
 
 from .decorator import AppendWorker
+from .push import PushCore
 
 
 class SocketCore(Singleton):
@@ -20,6 +21,7 @@ class SocketCore(Singleton):
 
         self.app = None
         self.worker = None
+        self.push = PushCore()
 
     def push_data(self, name, data):
 

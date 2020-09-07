@@ -12,6 +12,8 @@ from queue import Queue
 
 from eventlet import websocket
 
+from .push import PushCore
+
 
 class ServerSocket:
 
@@ -22,6 +24,7 @@ class ServerSocket:
 
         app = Rackio()
         tag_engine = TagEngine()
+        push_core = PushCore()
 
         while True:
 
@@ -31,6 +34,12 @@ class ServerSocket:
             result = dict()
             result["summary"] = app.summary()
             result["tags"] = tag_engine.serialize()
+
+            values = push_core.get_data()
+
+            for name, value in values.items():
+
+                result[name] = value
             
             message = json.dumps(result)
             self.send(message)
