@@ -39,6 +39,8 @@ def writer1():
 
         if T1 <= 5:
             direction *= -1
+
+            RackioSocket.push_data("direction", direction)
             
 
 if __name__ == "__main__":

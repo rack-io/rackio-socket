@@ -25,7 +25,7 @@ class SocketCore(Singleton):
 
     def push_data(self, name, data):
 
-        self.worker.push_data(name, data)
+        self.push.push_data(name, data)
 
     def __call__(self, app, port=5000):
 
