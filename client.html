@@ -3,7 +3,7 @@
 <body>
 <span>variable: </span><span id="variable"></span>
 <script>
-var ws = new WebSocket('ws://localhost:5000');
+var ws = new WebSocket('ws://localhost:5005');
 var variableSpan = document.getElementById('variable');
 
 ws.onmessage = function (event) {

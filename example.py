@@ -25,6 +25,8 @@ def writer1():
 
     direction = 1
 
+    socket = RackioSocket()
+
     while True:
 
         time.sleep(0.5)
@@ -40,7 +42,7 @@ def writer1():
         if T1 <= 5:
             direction *= -1
 
-        RackioSocket.push_data("direction", direction)
+        socket.push_data("direction", direction)
             
 
 if __name__ == "__main__":

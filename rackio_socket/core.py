@@ -27,8 +27,11 @@ class SocketCore(Singleton):
 
         self.push.push_data(name, data)
 
-    def __call__(self, app, port=5000):
+    def __call__(self, app=None, port=5000):
 
+        if not app:
+            return self
+        
         self.app = app
         self.worker = SocketWorker(port)
 
