@@ -26,10 +26,11 @@ class ServerSocket:
         tag_engine = TagEngine()
         push_core = PushCore()
 
-        while True:
+        period = push_core.period
 
-            duration = random.random() / 10
-            time.sleep(duration)
+        while True:
+            
+            time.sleep(period)
 
             result = dict()
             result["summary"] = app.summary()
