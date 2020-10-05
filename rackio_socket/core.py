@@ -5,6 +5,7 @@ This module implements the core app class and methods for Rackio Socket.
 """
 
 import json
+import socketio
 
 from ._singleton import Singleton
 from .worker import SocketWorker
@@ -20,22 +21,25 @@ class SocketCore(Singleton):
         super(SocketCore, self).__init__()
 
         self.app = None
-        self.worker = None
-        self.push = PushCore()
+        self.sio = socketio.Server()
 
-    def push_data(self, name, data):
-
-        self.push.push_data(name, data)
-
-    def __call__(self, app=None, port=5000, period=0.25):
+    def __call__(self, app=None, port=5000):
 
         if not app:
             return self
-
-        self.period = period
         
-        self.app = app
-        self.worker = SocketWorker(port)
+        self.app = socketio.WSGIApp(self.sio, app._api_manager.app)
 
-        app._start_workers = AppendWorker(app._start_workers, self.worker)
+    def event(self):
 
+        return self.sio.event
+
+    def on(self):
+
+        return self.sio.event
+
+    def emit(self):
+
+        return self.sio.emit
+
+    
