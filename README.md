@@ -1,5 +1,5 @@
 # rackio-socket
-A Rackio extension to add a WebSocket Server to Rackio
+A Rackio extension to add a SocketIO Server to Rackio
 
 ## Installation
 
@@ -15,7 +15,7 @@ from rackio_socket import RackioSocket
 
 app = Rackio()
 
-RackioSocket(app, 5005)
+RackioSocket(app)
 
 app.run(8028)
 ```

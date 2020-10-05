@@ -10,7 +10,7 @@ setuptools.setup(
     version="0.7",
     author="Nelson Carrasquel",
     author_email="rackio.framework@outlook.com",
-    description="A Rackio extension to add a WebSocket Server to Rackio",
+    description="A Rackio extension to add a SocketIO Server to Rackio",
     long_description=long_description,
     long_description_content_type="text/markdown",
     license="MIT",
