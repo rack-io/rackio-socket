@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="RackioSocket",
-    version="0.7",
+    version="0.8",
     author="Nelson Carrasquel",
     author_email="rackio.framework@outlook.com",
     description="A Rackio extension to add a SocketIO Server to Rackio",

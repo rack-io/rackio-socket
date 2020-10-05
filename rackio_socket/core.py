@@ -12,7 +12,6 @@ from ._singleton import Singleton
 from .worker import SocketWorker
 
 from .decorator import AppendWorker
-from .push import PushCore
 
 
 class SocketServer(Singleton):
@@ -31,6 +30,7 @@ class SocketCore(Singleton):
         super(SocketCore, self).__init__()
 
         self.app = None
+        self.port = None
         self.server = SocketServer()
 
     def __call__(self, app=None, port=5000):
@@ -38,12 +38,17 @@ class SocketCore(Singleton):
         if not app:
             return self.server.sio
 
+        self.app = app
+        self.port = port
+
         sio = self.server.sio
 
-        print(app._api_manager.app)
+        self.sio_app = socketio.WSGIApp(sio)
 
-        self.app = socketio.WSGIApp(sio)
+        self.worker = SocketWorker(self.sio_app, port)
 
-        eventlet.wsgi.server(eventlet.listen(('', port)), self.app)
+        app._start_workers = AppendWorker(app._start_workers, self.worker)
+
+        # eventlet.wsgi.server(eventlet.listen(('', self.port)), self.sio_app)
 
 

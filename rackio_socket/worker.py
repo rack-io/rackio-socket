@@ -3,27 +3,22 @@
 
 This module implements the core app class and methods for Rackio Socket.
 """
-from threading import Thread
+import eventlet
 
-from .server import ServerSocket
-from eventlet import wsgi, listen
+from threading import Thread
 
 
 class SocketWorker(Thread):
 
-    def __init__(self, port, *args, **kwargs):
+    def __init__(self, sio, port, *args, **kwargs):
 
         super(SocketWorker, self).__init__(*args, **kwargs)
 
+        self.sio = sio
         self.port = port
-        self.invoker = ServerSocket()
-
-    def push_data(self, name, data):
-
-        # self.invoker.add_data(name, data)
-        pass
 
     def run(self):
 
-        wsgi.server(listen(('', self.port)), self.invoker)
+        # wsgi.server(listen(('', self.port)), self.invoker)
+        eventlet.wsgi.server(eventlet.listen(('', self.port)), self.sio)
     

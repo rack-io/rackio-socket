@@ -15,15 +15,15 @@ from rackio_socket import RackioSocket
 
 app = Rackio()
 
-RackioSocket(app)
+RackioSocket(app, 5005)
 
 app.run(8028)
 ```
 
 ## Swagger UI
 
-After running your application it will serve the socket through the *5005* port.
+After running your application it will serve the SocketIO through the *5005* port.
 
-```
-ws://localhost:5005
+```javascript
+var socket = io('http://localhost:5005');
 ```
