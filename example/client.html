@@ -1,16 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<body>
-<span>variable: </span><span id="variable"></span>
-<script>
-var ws = new WebSocket('ws://localhost:5000');
-var variableSpan = document.getElementById('variable');
+    <head>
+        <script src='socket.io/socket.io.js'></script>
+    </head>
+    <body>
+        <ul id='messages'></ul>
+    </body>
+    <script>
+        var socket = io('http://localhost:5000');
 
-ws.onmessage = function (event) {
-    var message = JSON.parse(event.data);
-    console.log(message);
-    variableSpan.innerHTML = message.tags[0].value;
-}
-</script>
-</body>
+        socket.on('welcome', function(data) {
+            addMessage(data.message);
+
+            // Respond with a message including this clients' id sent from the server
+            socket.emit('i am client', {data: 'foo!', id: data.id});
+        });
+        socket.on('time', function(data) {
+            addMessage(data.time);
+        });
+        socket.on('error', console.error.bind(console));
+        socket.on('message', console.log.bind(console));
+
+        function addMessage(message) {
+            var text = document.createTextNode(message),
+                el = document.createElement('li'),
+                messages = document.getElementById('messages');
+
+            el.appendChild(text);
+            messages.appendChild(el);
+        }
+    </script>
 </html>

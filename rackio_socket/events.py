@@ -4,9 +4,10 @@
 This module implements all socket events defined for Rackio Socket.
 """
 
-from .core import SocketCore
+from .core import SocketServer
 
-rs = SocketCore()
+server = SocketServer()
+rs = server.sio
 
 @rs.event
 def connect(sid, environ):
@@ -14,5 +15,5 @@ def connect(sid, environ):
     rs.emit("welcome", {"message": "Welcome to RackioSocket, the SocketIO server for Rackio!"})
 
 @rs.event
-def disconnect(sid, environ):
+def disconnect(sid):
     print("disconnect " , sid)

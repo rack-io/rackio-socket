@@ -4,6 +4,7 @@
 This module implements the core app class and methods for Rackio Socket.
 """
 
+import eventlet
 import json
 import socketio
 
@@ -14,6 +15,15 @@ from .decorator import AppendWorker
 from .push import PushCore
 
 
+class SocketServer(Singleton):
+
+    def __init__(self):
+    
+        super(SocketServer, self).__init__()
+
+        self.sio = socketio.Server(cors_allowed_origins='*')
+
+
 class SocketCore(Singleton):
 
     def __init__(self):
@@ -21,25 +31,19 @@ class SocketCore(Singleton):
         super(SocketCore, self).__init__()
 
         self.app = None
-        self.sio = socketio.Server()
+        self.server = SocketServer()
 
     def __call__(self, app=None, port=5000):
 
         if not app:
-            return self
-        
-        self.app = socketio.WSGIApp(self.sio, app._api_manager.app)
+            return self.server.sio
 
-    def event(self):
+        sio = self.server.sio
 
-        return self.sio.event
+        print(app._api_manager.app)
 
-    def on(self):
+        self.app = socketio.WSGIApp(sio)
 
-        return self.sio.event
+        eventlet.wsgi.server(eventlet.listen(('', port)), self.app)
 
-    def emit(self):
 
-        return self.sio.emit
-
-    
