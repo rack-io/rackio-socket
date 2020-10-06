@@ -48,7 +48,4 @@ class SocketCore(Singleton):
         self.worker = SocketWorker(self.sio_app, port)
 
         app._start_workers = AppendWorker(app._start_workers, self.worker)
-
-        # eventlet.wsgi.server(eventlet.listen(('', self.port)), self.sio_app)
-
-
+    
