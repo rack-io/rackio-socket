@@ -18,7 +18,8 @@ setuptools.setup(
     include_package_data=True,
     packages=setuptools.find_packages(),
     install_requires=[
-        'eventlet'
+        'eventlet',
+        'python-socketio'
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
