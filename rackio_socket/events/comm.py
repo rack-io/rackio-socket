@@ -3,7 +3,6 @@
 
 This module implements all socket connections.
 """
-
 from ..core import SocketServer
 
 server = SocketServer()
