@@ -20,11 +20,7 @@ RackioSocket(app, 5005)
 app.run(8028)
 ```
 
-<<<<<<< HEAD
 ## SocketIO Client
-=======
-## JavaScript Client
->>>>>>> 6cdc676b25ca1bd9e433d3cad7ce213035306a15
 
 After running your application it will serve the SocketIO through the *5005* port.
 
