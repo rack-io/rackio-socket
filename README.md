@@ -20,7 +20,7 @@ RackioSocket(app, 5005)
 app.run(8028)
 ```
 
-## Swagger UI
+## JavaScript Client
 
 After running your application it will serve the SocketIO through the *5005* port.
 
