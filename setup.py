@@ -19,7 +19,9 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=[
         'eventlet',
-        'python-socketio'
+        'python-socketio',
+        'gevent',
+        'gevent-websocket'
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

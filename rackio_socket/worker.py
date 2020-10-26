@@ -3,7 +3,9 @@
 
 This module implements the core app class and methods for Rackio Socket.
 """
-import eventlet
+from gevent import pywsgi
+from geventwebsocket.handler import WebSocketHandler
+import socketio
 
 from threading import Thread
 
@@ -19,6 +21,8 @@ class SocketWorker(Thread):
 
     def run(self):
 
-        # wsgi.server(listen(('', self.port)), self.invoker)
-        eventlet.wsgi.server(eventlet.listen(('', self.port)), self.sio)
-    
+        app = socketio.WSGIApp(self.sio)
+        pywsgi.WSGIServer(('', self.port), app,
+            handler_class=WebSocketHandler).serve_forever()
+
+
