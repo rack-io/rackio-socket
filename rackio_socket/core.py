@@ -33,6 +33,10 @@ class SocketCore(Singleton):
         self.port = None
         self.server = SocketServer()
 
+    def get_sio(self):
+
+        return self.server.sio
+
     def __call__(self, app=None, port=5000):
 
         if not app:

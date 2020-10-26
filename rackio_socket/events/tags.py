@@ -10,8 +10,10 @@ from ..core import SocketServer
 server = SocketServer()
 rs = server.sio
 
+NAMESPACE = "/tags"
 
-@rs.event
+
+@rs.event(namespace=NAMESPACE)
 def dbtags(sid):
 
     logger = LoggerDAO()
@@ -19,7 +21,7 @@ def dbtags(sid):
     return logger.get_all()
 
 
-@rs.event
+@rs.event(namespace=NAMESPACE)
 def tags(sid):
 
     tags = TagsDAO()
@@ -27,7 +29,7 @@ def tags(sid):
     return tags.get_all()
 
 
-@rs.event
+@rs.event(namespace=NAMESPACE)
 def write_tag(sid, data):
 
     tag_id = data["tag_id"]
@@ -38,7 +40,7 @@ def write_tag(sid, data):
     return tags.write(tag_id, value)
 
 
-@rs.event
+@rs.event(namespace=NAMESPACE)
 def tag_history(sid, data):
 
     tag_id = data["tag_id"]
@@ -48,7 +50,7 @@ def tag_history(sid, data):
     return tags.get_history(tag_id)
 
 
-@rs.event
+@rs.event(namespace=NAMESPACE)
 def tag_trend(sid, data):
 
     tag_id = data["tag_id"]
@@ -60,7 +62,7 @@ def tag_trend(sid, data):
     return tags.get_trend(tag_id, tstart, tstop)
 
 
-@rs.event
+@rs.event(namespace=NAMESPACE)
 def tag_trends(sid, data):
 
     tags = data["tags"]

@@ -10,8 +10,10 @@ from ..core import SocketServer
 server = SocketServer()
 rs = server.sio
 
+NAMESPACE = "/alarms"
 
-@rs.event
+
+@rs.event(namespace=NAMESPACE)
 def alarms(sid):
 
     dao = AlarmsDAO()
@@ -19,7 +21,7 @@ def alarms(sid):
     return dao.get_all()
 
 
-@rs.event
+@rs.event(namespace=NAMESPACE)
 def alarm(sid, data):
 
     name = data["alarm_name"]
@@ -29,7 +31,7 @@ def alarm(sid, data):
     return dao.get(name)
 
 
-@rs.event
+@rs.event(namespace=NAMESPACE)
 def update_alarm(sid, data):
 
     name = data["alarm_name"]

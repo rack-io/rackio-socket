@@ -10,8 +10,10 @@ from ..core import SocketServer
 server = SocketServer()
 rs = server.sio
 
+NAMESPACE = "/events"
 
-@rs.event
+
+@rs.event(namespace=NAMESPACE)
 def events(sid):
 
     dao = EventsDAO()
@@ -19,7 +21,7 @@ def events(sid):
     return dao.get_all()
 
 
-@rs.event
+@rs.event(namespace=NAMESPACE)
 def publish_event(sid, data):
 
     user = data["user"]
